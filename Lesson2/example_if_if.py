@@ -3,7 +3,7 @@ num=int(input("Enter Number: "))
 # check if num is a valid number
 # must be between -100 and 100
 
-if num < -100 or num > 100:
+if -100<num>100:
     print("Invalid Number")
 if -100<=num<=100:
     print("Valid Number")
@@ -13,7 +13,7 @@ if -100<=num<=100:
     elif num < 0:
             print("negative")
             num -= 1
-        else:
+    else:
             print("zero")
 
     print("num", num)
