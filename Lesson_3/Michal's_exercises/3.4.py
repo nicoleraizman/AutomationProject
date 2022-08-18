@@ -1,21 +1,21 @@
 from random import randint
-num=randint(0,100)
-guess=randint
-count=0
 
-while num!=guess:
-    if num<guess:
-        guess=str(input("too low"))
-        count+=1
-    elif num>guess:
-        guess=str(input("too high"))
-        count+= 1
-else:
-    num==guess
-    guess=str(input("correct!"))
-    count+=1
+low_end= 0
+high_end = 100
 
-print(count)
+success = False
+while not success :
+    number = randint(low_end,high_end)
+    print(number)
+    input("Is this your number? ")
+    if is_number:
+        success = True
+        continue
+    high_or_low = input("Higher or lower?")
+    if high_or_low == "higher":
+        low_end = number +1
+    else:
+        high_end = number -1
 
 
 
