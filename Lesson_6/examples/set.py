@@ -3,6 +3,7 @@
 set1={10,20,30, 40, "abc",10}
 print(set1)
 
+# sum of 2 sets: set1|set2 (not with +!!!!!!!!!!)
 # create an empty set
 set1=set()
 
@@ -25,7 +26,7 @@ print(set1)
 # update function
 set2={11,12,13}
 set1.update(set2)
-print(set1)
+print('set1.update',set1)
 
 set2=set1
 print(set2)

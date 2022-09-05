@@ -1,6 +1,6 @@
-num=int(input("Enter Number: "))
+num = int(input("Enter Number: "))
 
-if num%2==0:
+if num % 2 == 0:
     print("Even Number")
 else:
     print("Odd Number")
