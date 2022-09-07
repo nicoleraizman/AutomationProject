@@ -8,22 +8,26 @@ class CardGame:
         and calls the function new_game, which is described below"""
         self.player1 = player1
         self.player2 = player2
+        self.in_cardgame= True
         self.new_game()
 
-    def __repr__(self):
+    def __str__(self):
         """Function that returns the message of the beginning of the game
         and contains the players' details"""
-        return f"The game is about to start." \
-               f"Player 1: {self.player1}" \
-               f"Player 2: {self.player2}" \
+        return f"The game is about to start...\n"\
+               f"Player 1: {self.player1}\n" \
+               f"Player 2: {self.player2}\n" \
                f"May the force be with you!"
 
     def new_game(self):
         """Function that mixes the cards in the deck and gives them to each player"""
-        deck = DeckOfCards()
-        deck.cards_shuffle()
-        self.player1.set_hand(deck)
-        self.player2.set_hand(deck)
+        if self.in_cardgame:
+            deck = DeckOfCards()
+            deck.cards_shuffle()
+            self.player1.set_hand(deck)
+            self.player2.set_hand(deck)
+        else:
+            print("Error! The function was not called from CardGame __init__")
 
 
     def get_winner(self):

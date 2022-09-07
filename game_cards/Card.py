@@ -11,8 +11,11 @@ class Card:
 
 
     def __gt__(self, other):
-        """Function that checks cards' values in order to find the grater one"""
-        if self.card_value>other.card_value:
+        """Function that checks cards' values in order to find the grater one.
+        If the values are equal, it returns None"""
+        if self.card_value>other.card_value and other.card_value != 1:
+            return True
+        elif self.card_value == 1 and other.card_value != 1:
             return True
         else:
             return False

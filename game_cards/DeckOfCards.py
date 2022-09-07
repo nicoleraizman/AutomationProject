@@ -25,7 +25,3 @@ class DeckOfCards:
         self.deck_list.remove(variant)
         return variant
 
-deck=DeckOfCards()
-deck.cards_shuffle()
-print(deck.deck_list)
-print(deck.deal_one())
