@@ -14,6 +14,11 @@ class Player:
             raise TypeError("Invalid name: must be of string class")
         if type(number_of_cards) != int:
             raise TypeError("Invalid number: must be of integer class")
+
+        #chack that the name is only letters- -USED_TO_BE_BUG
+        if name.isalpha() == False:
+            raise ValueError("Player name must be only letters")
+
         self.player_name = name
         self.player_deck = []
         if number_of_cards < 10 or number_of_cards > 26:

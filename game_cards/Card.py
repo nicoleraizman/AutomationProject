@@ -4,6 +4,12 @@ class Card:
     def __init__(self,value,suit):
         self.card_value = value
         self.card_suit = suit
+        if 1 > value or value > 13:
+            raise ValueError("Invalid card value: must be between 1-13 (includes)")
+        if 1 > suit or suit > 4:
+            raise ValueError("Invalid card suit: must be between 1-4 (includes)")
+        self.card_value = value
+        self.card_suit = suit
 
     def __repr__(self):
         """Function that allows to print card's properties"""
@@ -13,6 +19,10 @@ class Card:
     def __gt__(self, other):
         """Function that checks cards' values in order to find the grater one.
         If the values are equal, it returns None"""
+        # chack that other is a Card class -ADDED_TO_BE_GLOBAL
+        if type(other) != Card:
+            raise TypeError("Invalid variant: must be of Card class")
+
         if self.card_value>other.card_value and other.card_value != 1:
             return True
         elif self.card_value == 1 and other.card_value != 1:
@@ -22,7 +32,16 @@ class Card:
 
     def __eq__(self, other):
         """Function that compares cards' values in order to determine whether they are equal"""
-        if self.card_value == other.card_value:
+        # check that other is a Card class -ADDED_TO_BE_GLOBAL
+        if type(other) != Card:
+            raise TypeError("Invalid variant: must be of Card class")
+
+        # check that other is not the same card -USED_TO_BE_BUG
+        # if self.card_suit == other.card_suit and self.card_value == other.card_value:
+        #     raise ValueError("Not possible  two of the same card in one deck")
+
+        # added the diffrent suit to see it's indeed thr same deck -ADDED_TO_BE_GLOBAL
+        if self.card_value == other.card_value and self.card_suit == other.card_suit:
             return True
         else:
             return False
@@ -50,5 +69,3 @@ class Card:
             return f"King"
         else:
             return str(self.card_value)
-
-

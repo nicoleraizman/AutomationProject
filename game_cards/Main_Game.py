@@ -1,11 +1,15 @@
-from game_cards.Card import Card
-from game_cards.DeckOfCards import DeckOfCards
 from game_cards.CardGame import CardGame
 from game_cards.Player import Player
 
-player1 = Player(input("Enter name of player 1: "))
-player2 = Player(input("Enter name of player 2: "))
+player1 = Player(input("Enter name of player 1: "),10)
+player2 = Player(input("Enter name of player 2: "),10)
+
+if player1.player_cards != player2.player_cards:
+    player2 = Player(player2.player_name, player1.player_cards)
 this_game = CardGame(player1, player2)
+
+this_game.in_cardgame = False
+
 print(this_game)
 
 for i in range(10):
