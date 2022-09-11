@@ -6,7 +6,6 @@ class CardGame:
     def __init__(self, player1:Player, player2:Player):
         """Function that gets the players' names, the number of their cards
         and calls the function new_game, which is described below"""
-        # checks if the type of players is Player ADDED_TO_BE_GLOBAL
         if type(player1) != Player:
             raise TypeError("Invalid type, must be of player!")
         if type(player2) != Player:
@@ -34,7 +33,6 @@ class CardGame:
             self.player2.set_hand(deck)
         else:
             print("Error! The function was not called from CardGame __init__")
-
 
     def get_winner(self):
         """Function that returns the player, which had gotten the biggest number of cards

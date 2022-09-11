@@ -138,7 +138,7 @@ class TestCard(TestCase):
         self.assertTrue(self.card.__eq__(other))
 
     def test__eq__valid_false(self):
-        """Function that test return False when the value of card and other are different"""
+        """Function that tests return False when the value of card and other are different"""
         other= Card(10,4)
         self.assertFalse(self.card.__eq__(other))
         other = Card(13, 2)
