@@ -9,3 +9,5 @@ class LogoSection:
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
 
+
+

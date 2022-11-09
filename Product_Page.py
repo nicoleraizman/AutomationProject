@@ -8,6 +8,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 class Product_Page:
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
+        self.wait = WebDriverWait(self.driver, 10)
 
     def product_name(self):
         return self.driver.find_element(By.CSS_SELECTOR,"#Description>h1")
@@ -32,4 +33,6 @@ class Product_Page:
     def add_to_cart_button(self):
         return self.driver.find_element(By.XPATH,"//div/button")
 
-    #add click button
+
+    def click_add_to_cart(self):
+        self.add_to_cart_button().click()
