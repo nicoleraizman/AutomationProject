@@ -39,17 +39,32 @@ class HomePage:
 
     def sign_in_button_click(self):
        self.sign_in_button().click()
-       self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "hi-user containMiniTitle ng-binding")))
+
+       # self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "hi-user containMiniTitle ng-binding")))
+       # self.wait.until(EC.element_to_be_clickable((By.ID, "menuUser")))
 
 # two of the functions do not work, ask Alon
     def sign_out_button(self):
-        self.driver.find_element(By.CSS_SELECTOR, "hi-user containMiniTitle ng-binding").click()
-        self.dropdown_list = self.driver.find_elements(By.ID, "loginMiniTitle")
-        return self.dropdown_list[2]
+        self.wait.until(EC.element_to_be_clickable((By.ID, "menuUser")))
+        self.driver.find_element(By.ID, "menuUserSVGPath").click()
+        dropdown_list = self.driver.find_elements(By.ID, "loginMiniTitle")
+        return dropdown_list[2]
+
 
     def sign_out_button_click(self):
+        self.wait.until(EC.element_to_be_clickable((By.ID, "menuUser")))
+        element = self.driver.find_element(By.ID, "menuUser")
+        self.driver.execute_script("arguments[0].click();", element)
         self.sign_out_button().click()
 
+
+    # def sign_out_button(self):
+    #     self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "hi-user containMiniTitle ng-binding")))
+    #     return self.driver.find_element(By.CSS_SELECTOR, "signOut($event)")
+    #
+    # def click_sign_out_button(self):
+    #     self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "hi-user containMiniTitle ng-binding")))
+    #     self.sign_out_button().click()
 
     def cart_menu(self):
         return self.driver.find_element(By.ID, "menuCart")
