@@ -8,6 +8,7 @@ from Category_Page import Category_Page
 from HomePage_Class import HomePage
 from Product_Page import Product_Page
 from Navigation_Class import Navigation
+from LogoSection_Class import LogoSection
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
@@ -29,32 +30,97 @@ class TestAOS(TestCase):
         self.Product_Page = Product_Page(self.driver)
         self.Navigation_Bar = Navigation(self.driver)
         self.wait = WebDriverWait(self.driver,10)
+        self.Logo_Section = LogoSection(self.driver)
 
     def testCase1(self):
         self.Home_Page.category_click(0)
-
-        element = self.driver.find_element(By.CSS_SELECTOR, "[class='productName ng-binding']")
-        self.driver.execute_script("arguments[0].click();", element)
-
-        #product = self.driver.find_elements(By.CSS_SELECTOR, "[class='productName ng-binding']")
-        #self.wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "[class='productName ng-binding']")))
-
-        #self.Category_Page.pick_a_product(0)
-
-        # element= self.driver.find_element(By.CSS_SELECTOR)
-        # ActionChains(self.driver).move_to_element().send_keys(Keys.ARROW_DOWN).perform()
-
-        self.Product_Page.change_quantity("3")
+        self.Category_Page.pick_a_product(0)
+        sleep(2)
+        quantity1 = self.Product_Page.change_quantity("2")
+        sleep(2)
+        self.Product_Page.click_add_to_cart()
+        sleep(2)
+        self.Navigation_Bar.click_homepage_button()
+        self.Home_Page.category_click(1)
+        sleep(2)
+        self.Category_Page.pick_a_product(1)
+        sleep(2)
+        quantity2 = self.Product_Page.change_quantity("9")
+        sleep(2)
         self.Product_Page.click_add_to_cart()
 
+        first = int(quantity1)
+        second = int(quantity2)
+        final_quantity = first + second
+        print(final_quantity)
+        self.Logo_Section.cart_icon()
+        total = self.Logo_Section.total_sum_text()
+        #(5 items)
+        total = total[1:-7]
+        total = int(total)
+        print(total)
+        self.assertEqual(total,final_quantity)
+
+
+    def testcase2(self):
+        self.Home_Page.category_click(0)
+        self.Category_Page.pick_a_product(1)
+        product1_name = self.Product_Page.product_name_text()
+        print(product1_name)
+        #sleep(2)
+        quantity1 = self.Product_Page.change_quantity("2")
+        #sleep(2)
+        self.Product_Page.click_add_to_cart()
+        #sleep(2)
 
         self.Navigation_Bar.click_homepage_button()
-
-
         self.Home_Page.category_click(1)
+        #sleep(2)
         self.Category_Page.pick_a_product(1)
-        self.Product_Page.change_quantity("2")
+        product2_name = self.Product_Page.product_name_text()
+        print(product2_name)
+        #sleep(2)
+        quantity2 = self.Product_Page.change_quantity("3")
+
         self.Product_Page.click_add_to_cart()
+
+        self.Navigation_Bar.click_homepage_button()
+        self.Home_Page.category_click(3)
+        sleep(2)
+        self.Category_Page.pick_a_product(0)
+        product3_name = self.Product_Page.product_name_text()
+        print(product3_name)
+        sleep(2)
+        quantity3 = self.Product_Page.change_quantity("1")
+        sleep(2)
+        self.Product_Page.click_add_to_cart()
+        self.Logo_Section.cart_icon()
+        print(self.Logo_Section.name_of_products_in_cart_text(2))
+        print(self.Logo_Section.name_of_products_in_cart_text(1))
+        print(self.Logo_Section.name_of_products_in_cart_text(0))
+
+        self.Logo_Section.cart_icon()
+
+        self.assertIn(self.Logo_Section.name_of_products_in_cart_text(2),product1_name)
+        self.assertIn(self.Logo_Section.name_of_products_in_cart_text(1),product2_name)
+        self.assertIn(self.Logo_Section.name_of_products_in_cart_text(0),product3_name)
+
+        print(self.Logo_Section.quantity_of_product_in_cart(0))
+        print(self.Logo_Section.quantity_of_product_in_cart(1))
+        print(self.Logo_Section.quantity_of_product_in_cart(2))
+        self.assertEqual(self.Logo_Section.quantity_of_product_in_cart(0),quantity3)
+
+        self.assertEqual(self.Logo_Section.quantity_of_product_in_cart(2),quantity1)
+        self.assertEqual(self.Logo_Section.quantity_of_product_in_cart(1), quantity2)
+
+
+
+
+
+
+
+
+
 
 
 

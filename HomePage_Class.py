@@ -14,7 +14,7 @@ class HomePage:
 
     def category_click(self, index):
         self.category_element()[index].click()
-        self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "select  ng-binding")))
+        #self.wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "select  ng-binding")))
 
     def user_icon(self):
         return self.driver.find_element(By.ID, "menuUser")
