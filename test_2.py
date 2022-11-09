@@ -20,5 +20,3 @@ class testAOS(TestCase):
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
 
-
-
