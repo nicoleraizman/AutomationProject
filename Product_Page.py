@@ -9,6 +9,8 @@ class Product_Page:
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
         self.wait = WebDriverWait(self.driver, 10)
+        self.list_colors = []
+
 
     def product_name(self):
         return self.driver.find_element(By.CSS_SELECTOR,"#Description>h1")
@@ -19,12 +21,33 @@ class Product_Page:
     def product_price(self):
         return self.driver.find_element(By.CSS_SELECTOR,"#Description>h2")
 
+    def product_price_text(self):
+        return self.product_price().text[1:]
+
+    def product_price_text_to_float(self):
+        return float(self.product_price_text())
+
     def colors_list(self):
-        return self.driver.find_elements(By.ID,"rabbit")
+        self.list_colors = self.driver.find_elements(By.ID,"rabbit")
+
+    def colors_list_text(self,index):
+        return self.list_colors[index].get_attribute("title")
+
+    def click_on_color(self,index):
+        element = self.list_colors[index]
+        self.driver.execute_script("arguments[0].click();", element)
 
 
-    def choose_color(self,color):
-        return self.driver.find_elements(By.CSS_SELECTOR,f"[title='{color}']")
+
+
+
+
+
+    # def choose_color(self,color):
+    #     return self.driver.find_element(By.CSS_SELECTOR,f"[title='{color}']")
+
+    # def choose_color_text(self, color):
+    #     return self.choose_color(color).text
 
 
     def pick_color(self,index):
@@ -39,11 +62,15 @@ class Product_Page:
         self.quantity_of_product().send_keys(num)
         return num
 
+
+
+
     def add_to_cart_button(self):
         return self.driver.find_element(By.XPATH,"//div/button")
 
 
     def click_add_to_cart(self):
+
         self.add_to_cart_button().click()
 
 

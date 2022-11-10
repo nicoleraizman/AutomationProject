@@ -5,12 +5,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 
-class Product_Page:
+class ShoppingCart:
     def __init__(self, driver:webdriver.Chrome):
         self.driver = driver
 
     def shopping_cart_location(self):
         return self.driver.find_element(By.CSS_SELECTOR,".sp>h3")
+
+    def shopping_cart_location_text(self):
+        return self.shopping_cart_location().text[:13]
 
     def total_price(self):
         return self.driver.find_elements(By.CSS_SELECTOR,"[colspan='2']>span")[3]
