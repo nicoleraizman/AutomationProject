@@ -50,6 +50,11 @@ class Product_Page:
     #     return self.choose_color(color).text
 
 
+
+    def choose_color(self,color):
+        return self.driver.find_elements(By.CSS_SELECTOR,f"[title='{color}']")
+
+
     def pick_color(self,index):
         self.colors_list()[index].click()
 
@@ -61,16 +66,22 @@ class Product_Page:
         ActionChains(self.driver).move_to_element(self.quantity_of_product()).send_keys(Keys.DELETE).perform()
         self.quantity_of_product().send_keys(num)
         return num
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 10f7509676f1a942933dd990eb6027a5a8982aba
 
     def add_to_cart_button(self):
         return self.driver.find_element(By.XPATH,"//div/button")
 
 
     def click_add_to_cart(self):
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10f7509676f1a942933dd990eb6027a5a8982aba
         self.add_to_cart_button().click()
 
 
